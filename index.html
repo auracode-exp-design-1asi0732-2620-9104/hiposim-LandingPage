@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>HipoSim | Simulador Hipotecario Independiente en Perú</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&amp;family=Roboto+Flex:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config" src="js/tailwind-config.js"></script>
+<link href="css/styles.css" rel="stylesheet"/>
+</head>
+<body class="bg-background text-on-background font-body-md selection:bg-secondary-container selection:text-on-secondary-container antialiased min-h-screen">
+<!-- 1. BARRA DE NAVEGACIÓN SUPERIOR (TopNavBar Anchor) -->
+<header class="bg-surface/90 backdrop-blur-md docked full-width top-0 sticky z-50 shadow-sm border-b border-outline-variant/30">
+<div class="flex justify-between items-center w-full max-w-7xl mx-auto px-margin-mobile md:px-margin h-20">
+<!-- Brand Logo -->
+<a class="flex items-center gap-3" href="#inicio">
+<img alt="HipoSim Logo Oficial" class="h-10 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1WyMFYJ8OLi0SOCuQkjYjCnDXoX9kYYODFR4E7SSEFR5mJmSJdhnxgnlo2ib29N0CDGZl8b9H81SVxeVpKfrMG5bmKV6uzh4GQ58rcL826ENu3UtTbH9-Xh4rE6uncAZiWOqCjDbi9H80Qdaw5BQYZndmV_fw0yExaCSaZZCLGMuv-vyE8GCiopMu70QM_TjFYB38DuzVs7MoyJLDt8jb1QDLltocTEjuNj-dyos9VRWYZwNBeK8wX5JNWa"/>
+</a>
+<!-- Desktop Nav Links -->
+<nav class="hidden md:flex items-center gap-8 text-label-md font-label-md">
+<a class="text-primary font-semibold border-b-2 border-primary pb-1" href="#inicio">Inicio</a>
+<a class="text-on-surface-variant hover:text-on-surface transition-colors" href="#como-funciona">Producto</a>
+<a class="text-on-surface-variant hover:text-on-surface transition-colors" href="#beneficios">Beneficios</a>
+<a class="text-on-surface-variant hover:text-on-surface transition-colors" href="#terminos">Términos</a>
+</nav>
+<!-- Trailing Action Buttons -->
+<div class="flex items-center gap-4">
+<a class="text-label-md font-label-md text-primary hover:text-primary-container font-medium px-3 py-2 transition-colors duration-150" href="#login">
+          Ingresar
+        </a>
+<a class="amber-btn text-on-surface font-semibold text-label-md font-label-md px-5 py-2.5 rounded-lg transition-all duration-150 hover:opacity-95 active:scale-95 inline-flex items-center gap-2" href="#simulador">
+<!-- <span class="material-symbols-outlined text-[18px]">calculate</span> -->
+          Simular ahora
+        </a>
+</div>
+</div>
+</header>
+<!-- 2. SECCIÓN HERO CON SIMULADOR HIPOTECARIO INTEGRADO -->
+<section class="relative pt-12 pb-20 overflow-hidden bg-gradient-to-b from-surface-container-low/60 to-background border-b border-outline-variant/20" id="inicio">
+<div class="max-w-7xl mx-auto px-margin-mobile md:px-margin">
+<!-- Grid 12 columnas: 5 columnas texto, 7 columnas simulador interactivo -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+<!-- Columna Izquierda: Mensaje Central y Confianza (5 cols) -->
+<div class="lg:col-span-5 flex flex-col justify-center pt-2">
+<!-- Trust Badges -->
+<div class="flex flex-wrap gap-2 mb-6">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container-high text-primary text-label-sm font-label-sm font-medium border border-outline-variant/30">
+<span class="material-symbols-outlined text-[16px] text-secondary">verified_user</span>
+              100% Independiente
+            </span>
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container-high text-primary text-label-sm font-label-sm font-medium border border-outline-variant/30">
+<span class="material-symbols-outlined text-[16px] text-secondary">account_balance</span>
+              Regulación SBS referencial
+            </span>
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-secondary-container/50 text-on-secondary-container text-label-sm font-label-sm font-medium border border-secondary/20">
+<span class="material-symbols-outlined text-[16px]">real_estate_agent</span>
+              Cálculo Bono Mivivienda
+            </span>
+</div>
+<!-- Headline -->
+<h1 class="text-display-lg font-display-lg text-primary tracking-tight leading-tight mb-5">
+            Conoce el costo real de tu crédito hipotecario antes de hablar con un banco
+          </h1>
+<!-- Subtitle -->
+<p class="text-body-lg font-body-lg text-on-surface-variant mb-8 leading-relaxed">
+            Compara de forma 100% independiente la TCEA real, seguros obligatorios y beneficios estatales como el Bono del Buen Pagador en Perú. Sin sesgo comercial y sin intermediarios.
+          </p>
+<!-- Action CTA -->
+<div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 mb-8">
+<a class="amber-btn text-on-surface font-semibold text-label-lg font-label-lg px-8 py-3.5 rounded-lg text-center transition-all duration-150 active:scale-95 flex items-center justify-center gap-2" href="#simulador">
+<span>Simular ahora — Gratis y sin registro</span>
+<span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+</a>
+</div>
+<!-- Micro-garantías de transparencia -->
+<div class="pt-6 border-t border-outline-variant/30 grid grid-cols-3 gap-4 text-center">
+<div>
+<p class="font-headline-sm text-primary font-bold">0%</p>
+<p class="text-label-sm font-label-sm text-on-surface-variant">Comisiones ocultas</p>
+</div>
+<div>
+<p class="font-headline-sm text-primary font-bold">S/ 0</p>
+<p class="text-label-sm font-label-sm text-on-surface-variant">Sin cobros ni registro</p>
+</div>
+<div>
+<p class="font-headline-sm text-primary font-bold">SBS</p>
+<p class="text-label-sm font-label-sm text-on-surface-variant">Fórmula francesa oficial</p>
+</div>
+</div>
+</div>
+<!-- Columna Derecha: Mockup Interactivo del Simulador (7 cols) -->
+<div class="lg:col-span-7 bg-surface-container-lowest rounded-xl p-6 lg:p-8 level-2 border border-outline-variant/40 relative" id="simulador">
+<div class="flex items-center justify-between pb-4 mb-6 border-b border-outline-variant/30">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-primary-container"></span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-bold">Simulador Hipotecario Interactivo</h2>
+</div>
+<span class="text-label-sm font-label-sm bg-surface-container-low text-primary px-3 py-1 rounded-full font-medium">Moneda: Soles (S/)</span>
+</div>
+<!-- Slider Controls Area -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6 mb-6">
+<!-- Inputs y Controles (7 cols dentro del simulator card) -->
+<div class="md:col-span-7 space-y-5">
+<!-- Control 1: Valor de Vivienda -->
+<div>
+<div class="flex justify-between items-center mb-1.5">
+<label class="text-label-md font-label-md text-on-surface font-medium">Valor de la vivienda</label>
+<span class="font-headline-sm text-headline-sm text-primary font-bold" id="valor-display">S/ 280,000</span>
+</div>
+<input class="w-full h-2 bg-surface-variant rounded-lg appearance-none cursor-pointer custom-range" id="slider-valor" max="800000" min="120000" step="5000" type="range" value="280000"/>
+<div class="flex justify-between text-label-sm font-label-sm text-on-surface-variant mt-1">
+<span>S/ 120,000</span>
+<span>S/ 800,000</span>
+</div>
+</div>
+<!-- Control 2: Cuota Inicial -->
+<div>
+<div class="flex justify-between items-center mb-1.5">
+<label class="text-label-md font-label-md text-on-surface font-medium">Cuota Inicial (15%)</label>
+<span class="font-label-lg font-label-lg text-primary font-semibold" id="inicial-display">S/ 42,000</span>
+</div>
+<input class="w-full h-2 bg-surface-variant rounded-lg appearance-none cursor-pointer custom-range" id="slider-inicial" max="40" min="10" step="5" type="range" value="15"/>
+<div class="flex justify-between text-label-sm font-label-sm text-on-surface-variant mt-1">
+<span>10% (mínimo)</span>
+<span>40%</span>
+</div>
+</div>
+<!-- Control 3: Plazo en Años -->
+<div>
+<div class="flex justify-between items-center mb-1.5">
+<label class="text-label-md font-label-md text-on-surface font-medium">Plazo del financiamiento</label>
+<span class="font-label-lg font-label-lg text-primary font-semibold" id="plazo-display">20 años (240 meses)</span>
+</div>
+<input class="w-full h-2 bg-surface-variant rounded-lg appearance-none cursor-pointer custom-range" id="slider-plazo" max="30" min="5" step="5" type="range" value="20"/>
+<div class="flex justify-between text-label-sm font-label-sm text-on-surface-variant mt-1">
+<span>5 años</span>
+<span>30 años</span>
+</div>
+</div>
+<!-- Checkbox: Mivivienda / Sostenible -->
+<div class="pt-2">
+<label class="flex items-center gap-3 p-3 rounded-lg border border-outline-variant/40 bg-surface-container-low/40 cursor-pointer hover:bg-surface-container-low transition-colors">
+<input checked="" class="w-5 h-5 text-primary-container rounded border-outline focus:ring-primary" id="check-bono" type="checkbox"/>
+<div class="text-left">
+<span class="text-label-md font-label-md font-semibold text-primary block">Aplicar Bono Buen Pagador (BBP)</span>
+<span class="text-label-sm font-label-sm text-on-surface-variant block">Subsidio Mivivienda según rango del inmueble</span>
+</div>
+</label>
+</div>
+</div>
+<!-- Resultados en Tiempo Real (5 cols dentro del simulator card) -->
+<div class="md:col-span-5 flex flex-col justify-between p-5 rounded-xl bg-surface-container-low border border-outline-variant/30">
+<div>
+<div class="flex items-center justify-between mb-2">
+<span class="text-label-sm font-label-sm uppercase tracking-wider text-on-surface-variant font-semibold">Cuota Mensual Proyectada</span>
+<span class="material-symbols-outlined text-primary text-[20px]">payments</span>
+</div>
+<!-- Highlighted Monthly Payment -->
+<div class="mb-4">
+<span class="text-metric-display font-metric-display text-primary font-extrabold tracking-tight" id="cuota-display">S/ 2,145</span>
+<span class="text-label-sm font-label-sm text-on-surface-variant block mt-0.5">/ mes (incluye desgravamen)</span>
+</div>
+<!-- Metrics Grid -->
+<div class="space-y-3 pt-3 border-t border-outline-variant/30">
+<div class="flex justify-between items-center text-body-sm font-body-sm">
+<span class="text-on-surface-variant flex items-center gap-1 group relative cursor-help">
+                      TCEA estimada
+                      <span class="material-symbols-outlined text-[15px] text-primary">info</span>
+<!-- Tooltip -->
+<span class="hidden group-hover:block absolute z-20 w-56 p-2 text-label-sm font-label-sm bg-inverse-surface text-inverse-on-surface rounded shadow-lg -top-16 left-0">
+                        ¿Qué es TCEA? Tasa de Costo Efectivo Anual: incluye intereses, seguro de desgravamen, seguro de inmueble y comisiones totales.
+                      </span>
+</span>
+<span class="font-bold text-primary">8.85%</span>
+</div>
+<div class="flex justify-between items-center text-body-sm font-body-sm">
+<span class="text-on-surface-variant">Préstamo neto</span>
+<span class="font-semibold text-on-surface" id="prestamo-display">S/ 219,800</span>
+</div>
+<div class="flex justify-between items-center text-body-sm font-body-sm p-2 rounded bg-surface-container-lowest border border-outline-variant/30">
+<div class="flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="text-label-sm font-label-sm text-secondary font-semibold">Bono Buen Pagador</span>
+</div>
+<span class="text-label-sm font-label-sm font-bold text-secondary" id="bono-display">+S/ 18,200</span>
+</div>
+</div>
+</div>
+<div class="mt-6 pt-4 border-t border-outline-variant/30">
+<button class="w-full py-2.5 px-4 rounded-lg bg-primary-container text-on-primary hover:bg-primary text-label-md font-label-md font-semibold transition-colors flex items-center justify-center gap-2" type="button">
+<span class="material-symbols-outlined text-[18px]">table_view</span>
+                  Ver cronograma completo
+                </button>
+</div>
+</div>
+</div>
+<!-- Footnote inside calculator -->
+<div class="flex items-center justify-between text-label-sm font-label-sm text-on-surface-variant pt-2 border-t border-outline-variant/20">
+<span>*TCEA referencial basada en el promedio del sistema bancario supervisado por la SBS.</span>
+<span class="text-secondary font-medium">Método Francés Ordinario</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 3. SECCIÓN 'CÓMO FUNCIONA' (4 Pasos Material Design) -->
+<section class="py-20 bg-surface border-b border-outline-variant/20" id="como-funciona">
+<div class="max-w-7xl mx-auto px-margin-mobile md:px-margin">
+<div class="text-center max-w-3xl mx-auto mb-16">
+<span class="text-label-md font-label-md font-bold text-secondary uppercase tracking-wider mb-2 block">Metodología Clara</span>
+<h2 class="text-headline-lg font-headline-lg text-primary tracking-tight mb-4">¿Cómo funciona HipoSim?</h2>
+<p class="text-body-md font-body-md text-on-surface-variant">
+          En sólo cuatro pasos sencillos obtén una radiografía completa de tus futuras cuotas sin ceder tus datos a intermediarios comerciales.
+        </p>
+</div>
+<!-- 4 Cards Bento Flow -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Paso 1 -->
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/40 level-1 hover:level-2 transition-all relative">
+<div class="w-12 h-12 rounded-xl bg-surface-container-low text-primary flex items-center justify-center mb-5 font-bold font-headline-sm">
+            01
+          </div>
+<h3 class="text-headline-sm font-headline-sm text-on-surface mb-2 font-bold">Datos de la vivienda</h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant leading-relaxed">
+            Indica el precio del inmueble en soles o dólares y si aplica a proyecto Mivivienda o certificación de Vivienda Sostenible.
+          </p>
+<div class="mt-4 pt-4 border-t border-outline-variant/20 flex items-center gap-2 text-label-sm font-label-sm text-primary font-medium">
+<span class="material-symbols-outlined text-[16px]">apartment</span>
+            Soles / Dólares
+          </div>
+</div>
+<!-- Paso 2 -->
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/40 level-1 hover:level-2 transition-all relative">
+<div class="w-12 h-12 rounded-xl bg-surface-container-low text-primary flex items-center justify-center mb-5 font-bold font-headline-sm">
+            02
+          </div>
+<h3 class="text-headline-sm font-headline-sm text-on-surface mb-2 font-bold">Condiciones de crédito</h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant leading-relaxed">
+            Elige tu cuota inicial desde el 10%, el plazo en años deseado y evalúa alternativas con o sin periodos de gracia.
+          </p>
+<div class="mt-4 pt-4 border-t border-outline-variant/20 flex items-center gap-2 text-label-sm font-label-sm text-primary font-medium">
+<span class="material-symbols-outlined text-[16px]">tune</span>
+            Inicial flexible
+          </div>
+</div>
+<!-- Paso 3 -->
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/40 level-1 hover:level-2 transition-all relative">
+<div class="w-12 h-12 rounded-xl bg-surface-container-low text-primary flex items-center justify-center mb-5 font-bold font-headline-sm">
+            03
+          </div>
+<h3 class="text-headline-sm font-headline-sm text-on-surface mb-2 font-bold">Comparación transparente</h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant leading-relaxed">
+            HipoSim calcula cuotas bajo el método francés, seguros de desgravamen reales, pólizas de inmueble y gastos notariales típicos.
+          </p>
+<div class="mt-4 pt-4 border-t border-outline-variant/20 flex items-center gap-2 text-label-sm font-label-sm text-primary font-medium">
+<span class="material-symbols-outlined text-[16px]">visibility</span>
+            TCEA desglosada
+          </div>
+</div>
+<!-- Paso 4 -->
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/40 level-1 hover:level-2 transition-all relative">
+<div class="w-12 h-12 rounded-xl bg-surface-container-low text-primary flex items-center justify-center mb-5 font-bold font-headline-sm">
+            04
+          </div>
+<h3 class="text-headline-sm font-headline-sm text-on-surface mb-2 font-bold">Decisión informada</h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant leading-relaxed">
+            Accede a tu cronograma de amortización detallado, compara el Costo Total del Crédito y negocia con ventaja frente a los bancos.
+          </p>
+<div class="mt-4 pt-4 border-t border-outline-variant/20 flex items-center gap-2 text-label-sm font-label-sm text-primary font-medium">
+<span class="material-symbols-outlined text-[16px]">verified</span>
+            Poder de negociación
+          </div>
+</div>
+</div>
+</div>
+</section>
+<!-- 4. SECCIÓN 'DIFERENCIACIÓN: HIPOSIM VS. BANCOS TRADICIONALES' -->
+<section class="py-20 bg-background border-b border-outline-variant/20">
+<div class="max-w-7xl mx-auto px-margin-mobile md:px-margin">
+<div class="text-center max-w-3xl mx-auto mb-16">
+<span class="text-label-md font-label-md font-bold text-secondary uppercase tracking-wider mb-2 block">Transparencia Radical</span>
+<h2 class="text-headline-lg font-headline-lg text-primary tracking-tight mb-4">HipoSim vs. Simuladores Bancarios Tradicionales</h2>
+<p class="text-body-md font-body-md text-on-surface-variant">
+          Entiende por qué los portales bancarios habituales protegen sus márgenes comerciales mientras que HipoSim defiende tu bolsillo.
+        </p>
+</div>
+<!-- Comparison Cards Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
+<!-- Columna Izquierda: Bancos Tradicionales -->
+<div class="bg-surface-container-low/60 rounded-2xl p-8 border border-outline-variant/50 relative">
+<div class="flex items-center gap-3 mb-6 pb-4 border-b border-outline-variant/30">
+<div class="w-10 h-10 rounded-full bg-error-container text-error flex items-center justify-center">
+<span class="material-symbols-outlined">domain_disabled</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm font-bold text-on-surface">Simuladores Bancarios</h3>
+<p class="text-label-sm font-label-sm text-on-surface-variant">BCP, Interbank, BBVA, Scotiabank, etc.</p>
+</div>
+</div>
+<ul class="space-y-5 text-body-md font-body-md">
+<li class="flex items-start gap-3 text-on-surface-variant">
+<span class="material-symbols-outlined text-error text-[20px] mt-0.5">close</span>
+<span><strong>Sesgo exclusivo hacia su propio producto:</strong> Jamás te informarán si otra entidad ofrece un crédito más barato para tu perfil.</span>
+</li>
+<li class="flex items-start gap-3 text-on-surface-variant">
+<span class="material-symbols-outlined text-error text-[20px] mt-0.5">close</span>
+<span><strong>Comisiones y seguros en letra chica:</strong> Destacan la TEA en grande y ocultan el impacto de los seguros obligatorios que elevan la TCEA.</span>
+</li>
+<li class="flex items-start gap-3 text-on-surface-variant">
+<span class="material-symbols-outlined text-error text-[20px] mt-0.5">close</span>
+<span><strong>Barreras de prospección:</strong> Te obligan a ingresar tu DNI, correo electrónico y número telefónico para iniciar un asedio de llamadas de ventas.</span>
+</li>
+<li class="flex items-start gap-3 text-on-surface-variant">
+<span class="material-symbols-outlined text-error text-[20px] mt-0.5">close</span>
+<span><strong>Opacidad en subsidios:</strong> No aplican de forma inmediata o transparente los cálculos del Bono del Buen Pagador ni Mivivienda Sostenible.</span>
+</li>
+</ul>
+</div>
+<!-- Columna Derecha: HipoSim (Destacada) -->
+<div class="bg-surface-container-lowest rounded-2xl p-8 border-2 border-primary-container level-2 relative">
+<div class="absolute -top-3.5 right-6 bg-primary-container text-on-primary px-3 py-1 rounded-full text-label-sm font-label-sm font-semibold tracking-wide">
+            Tu aliado independiente
+          </div>
+<div class="flex items-center gap-3 mb-6 pb-4 border-b border-outline-variant/30">
+<div class="w-10 h-10 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined">verified</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm font-bold text-primary">HipoSim Perú</h3>
+<p class="text-label-sm font-label-sm text-secondary font-medium">100% Imparcial y sin intermediarios</p>
+</div>
+</div>
+<ul class="space-y-5 text-body-md font-body-md">
+<li class="flex items-start gap-3 text-on-surface">
+<span class="material-symbols-outlined text-secondary text-[20px] mt-0.5">check_circle</span>
+<span><strong>100% Imparcial e independiente:</strong> No cobramos comisiones de ningún banco ni colocamos créditos, garantizando cálculos objetivos.</span>
+</li>
+<li class="flex items-start gap-3 text-on-surface">
+<span class="material-symbols-outlined text-secondary text-[20px] mt-0.5">check_circle</span>
+<span><strong>TCEA desglosada al céntimo:</strong> Transparencia total que separa el capital, intereses, seguro de desgravamen y seguro de todo riesgo.</span>
+</li>
+<li class="flex items-start gap-3 text-on-surface">
+<span class="material-symbols-outlined text-secondary text-[20px] mt-0.5">check_circle</span>
+<span><strong>Simulación anónima e inmediata:</strong> Pruébalo sin registro obligatorio, sin llamadas no solicitadas ni spam en tu WhatsApp.</span>
+</li>
+<li class="flex items-start gap-3 text-on-surface">
+<span class="material-symbols-outlined text-secondary text-[20px] mt-0.5">check_circle</span>
+<span><strong>Integración de subsidios estatales:</strong> Aplica automáticamente las tablas vigentes del BBP y Mivivienda Sostenible vigentes en el Perú.</span>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<!-- 5. SECCIÓN 'BENEFICIOS ESTATALES Y PROGRAMA MIVIVIENDA' -->
+<section class="py-20 bg-surface-container-low/40 border-b border-outline-variant/20" id="beneficios">
+<div class="max-w-7xl mx-auto px-margin-mobile md:px-margin">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12">
+<div class="max-w-2xl">
+<span class="text-label-md font-label-md font-bold text-secondary uppercase tracking-wider mb-2 block">Apoyo del Estado Peruano</span>
+<h2 class="text-headline-lg font-headline-lg text-primary tracking-tight mb-3">Beneficios Estatales y Programa Mivivienda</h2>
+<p class="text-body-md font-body-md text-on-surface-variant">
+            Diseñado especialmente para compradores primerizos de 25 a 40 años: aprovecha subsidios estatales no reembolsables para reducir tu cuota mensual.
+          </p>
+</div>
+<div class="mt-4 md:mt-0">
+<a class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg border-2 border-primary-container text-primary-container hover:bg-primary-container hover:text-on-primary font-semibold text-label-md font-label-md transition-colors" href="#simulador">
+<span class="material-symbols-outlined text-[18px]">rule</span>
+            Ver si calificas al bono
+          </a>
+</div>
+</div>
+<!-- Bento Grid de Programas Estatales -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Tarjeta 1: BBP -->
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/30 level-1 flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-4">
+<span class="p-2.5 rounded-lg bg-surface-container-low text-primary">
+<span class="material-symbols-outlined">redeem</span>
+</span>
+<span class="px-2.5 py-0.5 rounded-full text-label-sm font-label-sm font-semibold bg-secondary-container text-on-secondary-container">
+                Hasta S/ 26,400
+              </span>
+</div>
+<h3 class="font-headline-sm text-headline-sm font-bold text-primary mb-2">Bono del Buen Pagador (BBP)</h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant leading-relaxed mb-4">
+              Subsidio directo no reembolsable del Estado peruano otorgado a través del Fondo Mivivienda que complementa tu cuota inicial y reduce el capital financiado.
+            </p>
+</div>
+<ul class="text-label-sm font-label-sm text-on-surface space-y-2 pt-4 border-t border-outline-variant/20">
+<li class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-secondary text-[16px]">check</span>
+              No requiere devolución si cumples tus cuotas
+            </li>
+<li class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-secondary text-[16px]">check</span>
+              Se aplica directamente al monto de tu crédito
+            </li>
+</ul>
+</div>
+<!-- Tarjeta 2: Bono Sostenible -->
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/30 level-1 flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-4">
+<span class="p-2.5 rounded-lg bg-surface-container-low text-secondary">
+<span class="material-symbols-outlined">eco</span>
+</span>
+<span class="px-2.5 py-0.5 rounded-full text-label-sm font-label-sm font-semibold bg-surface-container-high text-primary">
+                Ahorro extra hasta S/ 5,800
+              </span>
+</div>
+<h3 class="font-headline-sm text-headline-sm font-bold text-primary mb-2">Bono Mivivienda Sostenible</h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant leading-relaxed mb-4">
+              Beneficio adicional para proyectos inmobiliarios certificados como sostenibles o eco-amigables, que incorporan griferías de bajo consumo y luces LED.
+            </p>
+</div>
+<ul class="text-label-sm font-label-sm text-on-surface space-y-2 pt-4 border-t border-outline-variant/20">
+<li class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-secondary text-[16px]">check</span>
+              Ahorro de hasta 30% en recibos de luz y agua
+            </li>
+<li class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-secondary text-[16px]">check</span>
+              Tasa de interés preferencial en bancos asociados
+            </li>
+</ul>
+</div>
+<!-- Tarjeta 3: Nuevo Crédito Mivivienda -->
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/30 level-1 flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-4">
+<span class="p-2.5 rounded-lg bg-surface-container-low text-primary">
+<span class="material-symbols-outlined">home_work</span>
+</span>
+<span class="px-2.5 py-0.5 rounded-full text-label-sm font-label-sm font-semibold bg-surface-container-high text-primary">
+                Hasta S/ 464,300
+              </span>
+</div>
+<h3 class="font-headline-sm text-headline-sm font-bold text-primary mb-2">Nuevo Crédito Mivivienda</h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant leading-relaxed mb-4">
+              Línea de crédito hipotecario para viviendas con valor tope establecido anualmente, ofreciendo tasas fijas en soles y plazos de pago entre 5 y 25 años.
+            </p>
+</div>
+<ul class="text-label-sm font-label-sm text-on-surface space-y-2 pt-4 border-t border-outline-variant/20">
+<li class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-secondary text-[16px]">check</span>
+              Cuota inicial mínima desde el 7.5%
+            </li>
+<li class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-secondary text-[16px]">check</span>
+              Crédito otorgado 100% en moneda local (soles)
+            </li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<!-- 6. SECCIÓN 'FUNCIONALIDADES AVANZADAS' (CREA TU CUENTA GRATIS) -->
+<section class="py-20 bg-surface border-b border-outline-variant/20">
+<div class="max-w-7xl mx-auto px-margin-mobile md:px-margin">
+<div class="text-center max-w-3xl mx-auto mb-16">
+<span class="text-label-md font-label-md font-bold text-secondary uppercase tracking-wider mb-2 block">Herramientas Profesionales</span>
+<h2 class="text-headline-lg font-headline-lg text-primary tracking-tight mb-4">Lleva tu simulación al siguiente nivel</h2>
+<p class="text-body-md font-body-md text-on-surface-variant">
+          Crea tu cuenta gratuita para acceder a funciones avanzadas que te darán el control completo ante las negociaciones bancarias.
+        </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Card 1 -->
+<div class="bg-surface-container-lowest p-8 rounded-xl border border-outline-variant/30 level-1 hover:border-primary-container transition-all">
+<div class="w-12 h-12 rounded-xl bg-surface-container-high text-primary flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-[24px]">compare_arrows</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm font-bold text-primary mb-3">Comparador de 3 escenarios</h3>
+<p class="text-body-md font-body-md text-on-surface-variant leading-relaxed mb-6">
+            Evalúa lado a lado diferentes porcentajes de cuota inicial y plazos para visualizar con exactitud cuántos miles de soles ahorras en intereses acumulados.
+          </p>
+<span class="text-label-md font-label-md font-semibold text-secondary flex items-center gap-1">
+            Optimiza tu ahorro
+            <span class="material-symbols-outlined text-[16px]">trending_up</span>
+</span>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-lowest p-8 rounded-xl border border-outline-variant/30 level-1 hover:border-primary-container transition-all">
+<div class="w-12 h-12 rounded-xl bg-surface-container-high text-primary flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-[24px]">history</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm font-bold text-primary mb-3">Historial guardado</h3>
+<p class="text-body-md font-body-md text-on-surface-variant leading-relaxed mb-6">
+            Guarda tus simulaciones favoritas en tu panel y actualízalas automáticamente cuando la SBS publique variaciones en las tasas de interés referenciales.
+          </p>
+<span class="text-label-md font-label-md font-semibold text-secondary flex items-center gap-1">
+            Monitoreo continuo
+            <span class="material-symbols-outlined text-[16px]">sync</span>
+</span>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-lowest p-8 rounded-xl border border-outline-variant/30 level-1 hover:border-primary-container transition-all">
+<div class="w-12 h-12 rounded-xl bg-surface-container-high text-primary flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-[24px]">picture_as_pdf</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm font-bold text-primary mb-3">Exportar informe PDF para negociar</h3>
+<p class="text-body-md font-body-md text-on-surface-variant leading-relaxed mb-6">
+            Descarga una ficha técnica en PDF con el cronograma y desglose de TCEA para presentarla en ventanilla y exigir a tu banco que iguale o mejore la tasa.
+          </p>
+<span class="text-label-md font-label-md font-semibold text-secondary flex items-center gap-1">
+            Ficha para ventanilla bancaria
+            <span class="material-symbols-outlined text-[16px]">download</span>
+</span>
+</div>
+</div>
+</div>
+</section>
+<!-- 7. CALL TO ACTION (CTA) FINAL -->
+<section class="py-20 bg-primary-container text-on-primary relative overflow-hidden">
+<!-- Decorative background elements -->
+<div class="absolute -right-20 -bottom-20 w-96 h-96 bg-primary rounded-full opacity-30 blur-3xl pointer-events-none"></div>
+<div class="absolute -left-20 -top-20 w-96 h-96 bg-secondary-container rounded-full opacity-10 blur-3xl pointer-events-none"></div>
+<div class="max-w-5xl mx-auto px-margin-mobile md:px-margin text-center relative z-10">
+<span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-on-primary-container text-label-sm font-label-sm font-medium mb-6">
+<span class="material-symbols-outlined text-[16px]">lock_open</span>
+        100% Gratuito y de libre acceso
+      </span>
+<h2 class="text-display-lg font-display-lg text-white tracking-tight mb-6">
+        Toma el control de tu mayor decisión financiera sin presiones comerciales
+      </h2>
+<p class="text-body-lg font-body-lg text-on-primary-container max-w-2xl mx-auto mb-10 leading-relaxed">
+        Compara las tasas reales en el mercado peruano en menos de 2 minutos. Sin agentes insistentes ni llamadas spam.
+      </p>
+<div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+<a class="amber-btn text-on-surface font-semibold text-headline-sm font-headline-sm px-10 py-4 rounded-xl transition-all duration-150 active:scale-95 flex items-center gap-3" href="#simulador">
+<span>Empieza tu simulación gratuita ahora</span>
+<span class="material-symbols-outlined text-[24px]">calculate</span>
+</a>
+</div>
+<p class="text-label-sm font-label-sm text-on-primary-container/80 mt-6">
+        No se requiere tarjeta de crédito ni registro previo para simular.
+      </p>
+</div>
+</section>
+<!-- 8. FOOTER INSTITUCIONAL (Footer Anchor) -->
+<footer class="bg-surface-container-low border-t border-outline-variant/30 text-on-surface-variant" id="terminos">
+<div class="w-full max-w-7xl mx-auto px-margin-mobile md:px-margin py-space-xl">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-outline-variant/20">
+<!-- Columna 1: Identidad & Logo (5 cols) -->
+<div class="md:col-span-5 space-y-4">
+<a class="inline-block" href="#inicio">
+<img alt="HipoSim Logo Oficial" class="h-10 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1WyMFYJ8OLi0SOCuQkjYjCnDXoX9kYYODFR4E7SSEFR5mJmSJdhnxgnlo2ib29N0CDGZl8b9H81SVxeVpKfrMG5bmKV6uzh4GQ58rcL826ENu3UtTbH9-Xh4rE6uncAZiWOqCjDbi9H80Qdaw5BQYZndmV_fw0yExaCSaZZCLGMuv-vyE8GCiopMu70QM_TjFYB38DuzVs7MoyJLDt8jb1QDLltocTEjuNj-dyos9VRWYZwNBeK8wX5JNWa"/>
+</a>
+<p class="text-body-sm font-body-sm text-on-surface-variant leading-relaxed max-w-md">
+            HipoSim Perú es una plataforma tecnológica e informativa independiente. No es una entidad bancaria ni financiera, no otorga créditos directamente ni capta fondos del público. Los cálculos se basan en fórmulas financieras estándar y metodologías de la SBS (Superintendencia de Banca, Seguros y AFP).
+          </p>
+</div>
+<!-- Columna 2: Enlaces Rápidos (3 cols) -->
+<div class="md:col-span-3 space-y-3">
+<h4 class="text-headline-sm font-headline-sm text-primary font-bold">Navegación</h4>
+<ul class="space-y-2 text-label-md font-label-md">
+<li><a class="text-on-surface-variant hover:text-on-surface transition-colors" href="#inicio">Inicio</a></li>
+<li><a class="text-on-surface-variant hover:text-on-surface transition-colors" href="#como-funciona">Producto</a></li>
+<li><a class="text-on-surface-variant hover:text-on-surface transition-colors" href="#beneficios">Beneficios</a></li>
+<li><a class="text-on-surface-variant hover:text-on-surface transition-colors" href="#simulador">Simular ahora</a></li>
+</ul>
+</div>
+<!-- Columna 3: Enlaces Institucionales y Transparencia (4 cols) -->
+<div class="md:col-span-4 space-y-3">
+<h4 class="text-headline-sm font-headline-sm text-primary font-bold">Transparencia</h4>
+<ul class="space-y-2 text-label-sm font-label-sm">
+<li><a class="text-on-surface-variant hover:text-on-surface transition-colors" href="#terminos">Términos y Condiciones</a></li>
+<li><a class="text-on-surface-variant hover:text-on-surface transition-colors" href="#privacidad">Privacidad</a></li>
+<li><a class="text-on-surface-variant hover:text-on-surface transition-colors" href="#metodologia">Metodología SBS</a></li>
+<li><a class="text-on-surface-variant hover:text-on-surface transition-colors" href="#transparencia">Transparencia Financiera</a></li>
+<li><a class="text-on-surface-variant hover:text-on-surface transition-colors" href="#faq">Preguntas Frecuentes</a></li>
+<li><a class="text-on-surface-variant hover:text-on-surface transition-colors" href="#contacto">Contacto</a></li>
+</ul>
+</div>
+</div>
+<!-- Copyright & Bottom Disclaimers -->
+<div class="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-label-sm font-label-sm text-on-surface-variant">
+<p>© 2025 HipoSim Perú. Plataforma de simulación y cálculo financiero independiente sin afiliación a entidades bancarias comerciales.</p>
+<div class="flex items-center gap-6">
+<span class="inline-flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+            Servicio 100% Descentralizado
+          </span>
+<span>Lima, Perú</span>
+</div>
+</div>
+</div>
+</footer>
+<!-- Micro-interactividad del simulador en vanilla JS -->
+<script src="js/main.js"></script>
+</body></html>
