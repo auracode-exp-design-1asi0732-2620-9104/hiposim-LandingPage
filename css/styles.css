@@ -45,19 +45,17 @@ input:focus-visible {
   border-radius: 4px;
 }
 /* Language selector button styles */
-#lang-es,
-#lang-en {
+#lang-es-header,
+#lang-en-header {
   background-color: transparent;
   color: #1f2933;
-  border: 1px solid #e0e0e0;
 }
-#lang-es:hover,
-#lang-en:hover {
+#lang-es-header:hover,
+#lang-en-header:hover {
   background-color: #f5f5f5;
 }
-#lang-es.active,
-#lang-en.active {
-  background-color: #0e5c63;
-  color: #ffffff;
-  border-color: #0e5c63;
+#lang-es-header.active,
+#lang-en-header.active {
+  color: #0e5c63;
+  font-weight: 600;
 }

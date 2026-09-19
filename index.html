@@ -14,6 +14,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <script id="tailwind-config" src="js/tailwind-config.js"></script>
+<script src="js/i18n.js"></script>
 <link href="css/styles.css" rel="stylesheet"/>
 </head>
 <body class="bg-background text-on-background font-body-md selection:bg-secondary-container selection:text-on-secondary-container antialiased min-h-screen">
@@ -33,6 +34,16 @@
 </nav>
 <!-- Trailing Action Buttons -->
 <div class="flex items-center gap-4">
+<!-- Language Selector (Mobile Hidden, Desktop Visible) -->
+<div class="flex items-center gap-2 md:border-l border-outline-variant/30 pl-4">
+<button id="lang-es-header" class="px-2 py-1 text-label-sm font-label-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-primary rounded" onclick="window.i18n.setLanguage('es_419')" aria-label="Cambiar idioma a Español">
+            ES
+          </button>
+<span class="text-on-surface-variant text-label-sm">/</span>
+<button id="lang-en-header" class="px-2 py-1 text-label-sm font-label-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-primary rounded" onclick="window.i18n.setLanguage('en_US')" aria-label="Change language to English">
+            EN
+          </button>
+</div>
 <a class="text-label-md font-label-md text-primary hover:text-primary-container font-medium px-3 py-2 transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-primary rounded" href="#login" aria-label="Ingresar a mi cuenta">
           Ingresar
         </a>
@@ -762,26 +773,14 @@
 </div>
 </div>
 <!-- Copyright & Bottom Disclaimers -->
-<div class="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-label-sm font-label-sm text-on-surface-variant pb-8 border-b border-outline-variant/20">
+<div class="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-label-sm font-label-sm text-on-surface-variant">
 <p>© 2026 HipoSim Perú. Plataforma de simulación y cálculo financiero independiente sin afiliación a entidades bancarias comerciales.</p>
 <div class="flex items-center gap-6">
 <span>Lima, Perú</span>
 </div>
 </div>
-<!-- Language Selector -->
-<div class="pt-8 flex items-center justify-center gap-4">
-<span class="text-label-sm font-label-sm text-on-surface-variant font-medium">Idioma / Language:</span>
-<button id="lang-es" class="px-3 py-1.5 rounded-lg text-label-sm font-label-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-primary" onclick="window.i18n.setLanguage('es_419')" aria-label="Cambiar idioma a Español">
-            Español
-          </button>
-<button id="lang-en" class="px-3 py-1.5 rounded-lg text-label-sm font-label-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-primary" onclick="window.i18n.setLanguage('en_US')" aria-label="Change language to English">
-            English
-          </button>
-</div>
 </div>
 </footer>
-<!-- Internacionalización (i18n) -->
-<script src="js/i18n.js"></script>
 <!-- Micro-interactividad del simulador en vanilla JS -->
 <script src="js/main.js"></script>
 </body></html>
