@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+  // ===== SIMULADOR HIPOTECARIO =====
   const sliderValor = document.getElementById('slider-valor');
   const sliderInicial = document.getElementById('slider-inicial');
   const sliderPlazo = document.getElementById('slider-plazo');
@@ -56,6 +57,11 @@ document.addEventListener('DOMContentLoaded', () => {
     prestamoDisplay.innerText = formatMoney(montoFinanciar);
     bonoDisplay.innerText = bono > 0 ? `+${formatMoney(bono)}` : 'S/ 0 (No aplica)';
     cuotaDisplay.innerText = formatMoney(cuotaMensual);
+
+    // Actualizar aria-valuetext de los sliders
+    sliderValor.setAttribute('aria-valuetext', formatMoney(valor));
+    sliderInicial.setAttribute('aria-valuetext', `${sliderInicial.value}%`);
+    sliderPlazo.setAttribute('aria-valuetext', `${años} años`);
   }
 
   sliderValor.addEventListener('input', calculateMortgage);
@@ -64,4 +70,63 @@ document.addEventListener('DOMContentLoaded', () => {
   checkBono.addEventListener('change', calculateMortgage);
 
   calculateMortgage();
+
+  // ===== FORMULARIO DE CONTACTO =====
+  const contactForm = document.getElementById('contact-form');
+  const contactName = document.getElementById('contact-name');
+  const contactEmail = document.getElementById('contact-email');
+  const contactMessage = document.getElementById('contact-message');
+  const btnSubmit = document.getElementById('btn-submit');
+  const successMessage = document.getElementById('success-message');
+
+  if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      // Limpiar errores previos
+      document.querySelectorAll('[id^="error-"]').forEach(el => el.classList.add('hidden'));
+
+      // Validar campos
+      let hasErrors = false;
+
+      if (!contactName.value.trim()) {
+        document.getElementById('error-name').classList.remove('hidden');
+        hasErrors = true;
+      }
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!contactEmail.value.trim() || !emailRegex.test(contactEmail.value)) {
+        document.getElementById('error-email').classList.remove('hidden');
+        hasErrors = true;
+      }
+
+      if (!contactMessage.value.trim()) {
+        document.getElementById('error-message').classList.remove('hidden');
+        hasErrors = true;
+      }
+
+      if (hasErrors) {
+        return;
+      }
+
+      // Si todos los campos son válidos, mostrar mensaje de éxito
+      btnSubmit.disabled = true;
+      btnSubmit.textContent = 'Enviando...';
+
+      // Simular envío (en producción, enviar a un servidor)
+      setTimeout(() => {
+        contactForm.style.display = 'none';
+        successMessage.classList.remove('hidden');
+
+        // Resetear después de 5 segundos para permitir otro envío
+        setTimeout(() => {
+          contactForm.reset();
+          contactForm.style.display = 'block';
+          successMessage.classList.add('hidden');
+          btnSubmit.disabled = false;
+          btnSubmit.textContent = 'Enviar mensaje';
+        }, 5000);
+      }, 800);
+    });
+  }
 });
