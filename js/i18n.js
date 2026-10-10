@@ -17,21 +17,23 @@ const EN_TEXT = {
   'Beneficios': 'Benefits',
   'Preguntas': 'FAQ',
   'Ingresar': 'Sign in',
-  'Ingresar a mi cuenta': 'Sign in to my account',
+  'Ingresar (próximamente)': 'Sign in (coming soon)',
+  'El ingreso estará disponible próximamente': 'Sign in will be available soon',
   'Simular ahora': 'Simulate now',
   'Ir al simulador hipotecario gratuito': 'Go to the free mortgage simulator',
   'Ir al simulador hipotecario gratuito y sin registro': 'Go to the free mortgage simulator, no registration',
 
   // Hero
   '100% Independiente': '100% Independent',
-  'Regulación SBS referencial': 'Reference SBS regulation',
+  'Tasa referencial de mercado': 'Market reference rate',
   'Cálculo Bono Mivivienda': 'Mivivienda Bonus calculation',
   'Conoce el costo real de tu crédito hipotecario antes de hablar con un banco': 'Know the real cost of your mortgage before talking to a bank',
   'Compara de forma 100% independiente la TCEA real, seguros obligatorios y beneficios estatales como el Bono del Buen Pagador en Perú. Sin sesgo comercial y sin intermediarios.': 'Compare, 100% independently, the real TCEA (APR), mandatory insurance and state benefits such as the Good Payer Bonus in Peru. No commercial bias and no intermediaries.',
   'Simular ahora (gratis y sin registro)': 'Simulate now (free, no registration)',
   'Comisiones ocultas': 'Hidden fees',
   'Sin cobros ni registro': 'No charges or registration',
-  'Fórmula francesa oficial': 'Official French formula',
+  'Francés': 'French',
+  'Método de cuotas fijas': 'Fixed installment method',
 
   // Simulador
   'Simulador Hipotecario Interactivo': 'Interactive Mortgage Simulator',
@@ -58,7 +60,17 @@ const EN_TEXT = {
   'Bono Buen Pagador': 'Good Payer Bonus',
   'S/ 0 (No aplica)': 'S/ 0 (Not applicable)',
   'Ver cronograma completo': 'View full schedule',
-  '*TCEA referencial basada en el promedio del sistema bancario supervisado por la SBS.': '*Reference TCEA based on the average of the banking system supervised by the SBS.',
+  'Cronograma de pagos completo': 'Full payment schedule',
+  'Cerrar cronograma': 'Close schedule',
+  'Tabla del cronograma de pagos': 'Payment schedule table',
+  'Detalle mensual calculado con el método francés': 'Monthly detail calculated with the French method',
+  'Mes': 'Month',
+  'Cuota': 'Installment',
+  'Interés': 'Interest',
+  'Amortización': 'Principal',
+  'Saldo': 'Balance',
+  'Cálculo referencial con el método francés y una tasa efectiva anual de 8.85%. No incluye seguros ni comisiones.': 'Reference calculation with the French method and an annual effective rate of 8.85%. It does not include insurance or fees.',
+  '*TCEA referencial. No es una oferta de crédito: cada entidad financiera define su tasa.': '*Reference TCEA (APR). It is not a credit offer: each financial institution sets its own rate.',
   'Método Francés Ordinario': 'Ordinary French Method',
 
   // Cómo funciona
@@ -171,7 +183,12 @@ const EN_TEXT = {
   'El mensaje es obligatorio': 'Message is required',
   'Enviar mensaje': 'Send message',
   'Enviando...': 'Sending...',
-  '¡Gracias! Tu mensaje fue enviado exitosamente. Te responderemos pronto.': 'Thank you! Your message was sent successfully. We will reply soon.',
+  'Enviando tu mensaje. Puede tardar hasta un minuto.': 'Sending your message. It can take up to a minute.',
+  'No pudimos enviar tu mensaje. Revisa tu conexión e inténtalo de nuevo.': 'We could not send your message. Check your connection and try again.',
+  'El servicio no está disponible en este momento. Inténtalo de nuevo en unos minutos.': 'The service is not available right now. Try again in a few minutes.',
+  'Enviaste varios mensajes seguidos. Espera un minuto e inténtalo de nuevo.': 'You sent several messages in a row. Wait a minute and try again.',
+  'Revisa los datos del formulario e inténtalo de nuevo.': 'Check the form and try again.',
+  '¡Gracias! Recibimos tu mensaje. Te responderemos pronto.': 'Thank you! We received your message. We will reply soon.',
 
   // Términos y condiciones
   'Términos y Condiciones': 'Terms and Conditions',
@@ -227,6 +244,7 @@ const EN_TEXT = {
 const EN_PATTERNS = [
   [/^(\d+) años \((\d+) meses\)$/, '$1 years ($2 months)'],
   [/^(\d+) años$/, '$1 years'],
+  [/^(\d+) cuotas mensuales de (S\/ [\d.,]+)$/, '$1 monthly installments of $2'],
 ];
 
 const ATTRS = ['aria-label', 'placeholder', 'alt', 'title', 'aria-valuetext'];
@@ -263,6 +281,12 @@ class I18nManager {
   }
 
   getSavedLanguage() {
+    // ?lang=en o ?lang=es en la dirección tiene prioridad (enlaces directos a un idioma).
+    try {
+      const param = new URLSearchParams(window.location.search).get('lang');
+      if (param === 'en') return 'en_US';
+      if (param === 'es') return 'es_419';
+    } catch (e) { /* dirección no disponible */ }
     try {
       const lang = localStorage.getItem(STORAGE_KEY);
       return lang === 'es_419' || lang === 'en_US' ? lang : null;
