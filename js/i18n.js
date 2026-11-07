@@ -301,9 +301,12 @@ class I18nManager {
 
   setLanguage(lang) {
     if (lang !== 'es_419' && lang !== 'en_US') return;
+    const changed = lang !== this.currentLanguage;
     this.currentLanguage = lang;
     this.setSavedLanguage(lang);
     this.apply();
+    // Solo cuenta el cambio hecho por la persona, no el idioma con el que arranca la página.
+    if (changed && window.HipoSimEvents) window.HipoSimEvents.track('language_changed', { language: lang });
   }
 
   t(orig) {

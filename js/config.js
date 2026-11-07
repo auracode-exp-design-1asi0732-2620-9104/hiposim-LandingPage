@@ -4,4 +4,7 @@ window.HIPOSIM_CONFIG = {
   contactEndpoint: 'https://hiposim-api.onrender.com/api/contact-messages',
   // El plan gratuito del servidor puede tardar cerca de un minuto en la primera petición.
   contactTimeoutMs: 90000,
+  // POST {sessionId, origin, name, properties} (TS09): eventos de uso anónimos para los experimentos.
+  // Déjalo vacío para apagar la recolección.
+  eventsEndpoint: 'https://hiposim-api.onrender.com/api/events',
 };
