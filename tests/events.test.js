@@ -105,6 +105,30 @@ test('respeta "No rastrear" del navegador', () => {
   assert.equal(calls.length, 0);
 });
 
+test('desactivar y volver a activar la medición se recuerda', () => {
+  freshBrowser();
+  assert.equal(events.isOptedOut(), false);
+
+  events.setOptOut(true);
+  assert.equal(events.isOptedOut(), true);
+  assert.equal(events.track('page_view'), false);
+  assert.equal(calls.length, 0);
+
+  events.setOptOut(false);
+  assert.equal(events.isOptedOut(), false);
+  assert.equal(events.track('page_view'), true);
+  assert.equal(calls.length, 1);
+});
+
+test('distingue "No rastrear" de la elección de la persona', () => {
+  freshBrowser();
+  Object.defineProperty(globalThis, 'navigator', { value: { doNotTrack: '1' }, configurable: true, writable: true });
+
+  assert.equal(events.isDoNotTrack(), true);
+  assert.equal(events.isOptedOut(), false);
+  assert.equal(events.isDisabled(), true);
+});
+
 test('un fallo de red o del servidor no rompe la página', async () => {
   freshBrowser();
   globalThis.fetch = () => Promise.reject(new Error('sin red'));

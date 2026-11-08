@@ -61,14 +61,32 @@
     }
   }
 
-  function isDisabled() {
+  // La persona desactivó la medición desde el aviso o desde la Política de Privacidad.
+  function isOptedOut() {
     try {
-      if (root.localStorage.getItem(OPT_OUT_KEY) === 'off') return true;
+      return root.localStorage.getItem(OPT_OUT_KEY) === 'off';
     } catch (error) {
-      /* almacenamiento no disponible */
+      return false; // almacenamiento no disponible
     }
+  }
+
+  function setOptOut(optedOut) {
+    try {
+      if (optedOut) root.localStorage.setItem(OPT_OUT_KEY, 'off');
+      else root.localStorage.removeItem(OPT_OUT_KEY);
+    } catch (error) {
+      /* almacenamiento no disponible: la elección vale solo para esta página */
+    }
+  }
+
+  // El navegador pide que no se rastree: se respeta sin preguntar.
+  function isDoNotTrack() {
     const nav = root.navigator || {};
     return nav.doNotTrack === '1' || root.doNotTrack === '1';
+  }
+
+  function isDisabled() {
+    return isOptedOut() || isDoNotTrack();
   }
 
   // Deja pasar solo las propiedades permitidas y de tipo simple.
@@ -115,5 +133,5 @@
     }
   }
 
-  return { EVENTS, track, buildPayload, getSessionId, isDisabled };
+  return { EVENTS, track, buildPayload, getSessionId, isDisabled, isOptedOut, setOptOut, isDoNotTrack };
 });
