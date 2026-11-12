@@ -8,7 +8,7 @@
  * - Respeta "No rastrear" del navegador y la opción de desactivarlo (localStorage hiposim.analytics = "off").
  * - Si el envío falla, no pasa nada: el Landing sigue funcionando igual.
  *
- * Contrato (TS09): POST {eventsEndpoint} con { sessionId, origin, name, properties }.
+ * Contrato (TS09): POST {eventsEndpoint} con { sessionId, source, name, properties }.
  * Si Gustavo cambia los nombres de los campos, solo hay que ajustar buildPayload.
  */
 (function (root, factory) {
@@ -19,19 +19,19 @@
     root.HipoSimEvents = api;
   }
 })(typeof window !== 'undefined' ? window : globalThis, function (root) {
-  const ORIGIN = 'landing';
+  const SOURCE = 'landing';
   const SESSION_KEY = 'hiposim.sessionId';
   const OPT_OUT_KEY = 'hiposim.analytics';
   const MAX_TEXT = 40;
 
   // Lista cerrada: nombre del evento -> propiedades permitidas.
   const EVENTS = {
-    page_view: ['language'],
+    page_viewed: ['language'],
     simulation_started: [],
     simulation_completed: ['propertyValue', 'downPaymentPercent', 'termYears', 'bonus'],
     schedule_opened: ['termYears'],
     language_changed: ['language'],
-    contact_sent: [],
+    contact_message_sent: [],
   };
 
   function randomId() {
@@ -106,7 +106,7 @@
   function buildPayload(name, properties) {
     return {
       sessionId: getSessionId(),
-      origin: ORIGIN,
+      source: SOURCE,
       name,
       properties: cleanProperties(name, properties),
     };

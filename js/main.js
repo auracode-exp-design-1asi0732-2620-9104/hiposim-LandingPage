@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (window.HipoSimEvents) window.HipoSimEvents.track(name, properties);
   }
 
-  track('page_view', { language: window.i18n ? window.i18n.currentLanguage : undefined });
+  track('page_viewed', { language: window.i18n ? window.i18n.currentLanguage : undefined });
 
   // "Iniciada": la primera vez que la persona toca un control del simulador.
   // "Completada": cuando deja de moverlos unos segundos, es decir, se quedó con un resultado.
@@ -367,7 +367,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Solo un 201 real confirma la recepción.
       if (response.status === 201) {
-        track('contact_sent'); // solo el hecho de enviar: nada de lo que escribió la persona
+        track('contact_message_sent'); // solo el hecho de enviar: nada de lo que escribió la persona
         contactForm.reset();
         contactForm.style.display = 'none';
         successMessage.classList.remove('hidden');

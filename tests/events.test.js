@@ -33,14 +33,14 @@ const events = require('../js/events.js');
 test('envía un evento permitido con la forma del contrato', () => {
   freshBrowser();
 
-  assert.equal(events.track('page_view', { language: 'es_419' }), true);
+  assert.equal(events.track('page_viewed', { language: 'es_419' }), true);
 
   assert.equal(calls.length, 1);
   assert.equal(calls[0].url, ENDPOINT);
   assert.equal(calls[0].options.method, 'POST');
   assert.equal(calls[0].options.keepalive, true);
-  assert.equal(calls[0].body.name, 'page_view');
-  assert.equal(calls[0].body.origin, 'landing');
+  assert.equal(calls[0].body.name, 'page_viewed');
+  assert.equal(calls[0].body.source, 'landing');
   assert.deepEqual(calls[0].body.properties, { language: 'es_419' });
   assert.match(calls[0].body.sessionId, /^[0-9a-f-]{36}$/);
 });
@@ -55,7 +55,7 @@ test('ignora un nombre que no está en la lista cerrada', () => {
 test('descarta las propiedades que no están permitidas, como datos personales', () => {
   freshBrowser();
 
-  events.track('contact_sent', { email: 'ana@example.com', name: 'Ana', message: 'hola' });
+  events.track('contact_message_sent', { email: 'ana@example.com', name: 'Ana', message: 'hola' });
   events.track('simulation_completed', { propertyValue: 280000, termYears: 20, bonus: true, phone: '987654321' });
 
   assert.deepEqual(calls[0].body.properties, {});
@@ -65,7 +65,7 @@ test('descarta las propiedades que no están permitidas, como datos personales',
 test('acorta los textos largos y descarta valores que no son simples', () => {
   freshBrowser();
 
-  events.track('page_view', { language: 'x'.repeat(100) });
+  events.track('page_viewed', { language: 'x'.repeat(100) });
   events.track('simulation_completed', { propertyValue: { raro: true }, termYears: NaN });
 
   assert.equal(calls[0].body.properties.language.length, 40);
@@ -75,7 +75,7 @@ test('acorta los textos largos y descarta valores que no son simples', () => {
 test('la sesión se mantiene durante la visita', () => {
   freshBrowser();
 
-  events.track('page_view');
+  events.track('page_viewed');
   events.track('schedule_opened', { termYears: 20 });
 
   assert.equal(calls[0].body.sessionId, calls[1].body.sessionId);
@@ -85,7 +85,7 @@ test('no envía nada si no hay dirección configurada', () => {
   freshBrowser();
   globalThis.HIPOSIM_CONFIG = {};
 
-  assert.equal(events.track('page_view'), false);
+  assert.equal(events.track('page_viewed'), false);
   assert.equal(calls.length, 0);
 });
 
@@ -93,7 +93,7 @@ test('respeta que la persona haya desactivado la recolección', () => {
   freshBrowser();
   globalThis.localStorage.setItem('hiposim.analytics', 'off');
 
-  assert.equal(events.track('page_view'), false);
+  assert.equal(events.track('page_viewed'), false);
   assert.equal(calls.length, 0);
 });
 
@@ -101,7 +101,7 @@ test('respeta "No rastrear" del navegador', () => {
   freshBrowser();
   Object.defineProperty(globalThis, 'navigator', { value: { doNotTrack: '1' }, configurable: true, writable: true });
 
-  assert.equal(events.track('page_view'), false);
+  assert.equal(events.track('page_viewed'), false);
   assert.equal(calls.length, 0);
 });
 
@@ -111,12 +111,12 @@ test('desactivar y volver a activar la medición se recuerda', () => {
 
   events.setOptOut(true);
   assert.equal(events.isOptedOut(), true);
-  assert.equal(events.track('page_view'), false);
+  assert.equal(events.track('page_viewed'), false);
   assert.equal(calls.length, 0);
 
   events.setOptOut(false);
   assert.equal(events.isOptedOut(), false);
-  assert.equal(events.track('page_view'), true);
+  assert.equal(events.track('page_viewed'), true);
   assert.equal(calls.length, 1);
 });
 
@@ -133,12 +133,12 @@ test('un fallo de red o del servidor no rompe la página', async () => {
   freshBrowser();
   globalThis.fetch = () => Promise.reject(new Error('sin red'));
 
-  assert.doesNotThrow(() => events.track('page_view'));
+  assert.doesNotThrow(() => events.track('page_viewed'));
   // Espera un ciclo para confirmar que el rechazo quedó atendido y no escapa como error.
   await new Promise((resolve) => setImmediate(resolve));
 
   globalThis.fetch = () => {
     throw new Error('fetch roto');
   };
-  assert.equal(events.track('page_view'), false);
+  assert.equal(events.track('page_viewed'), false);
 });
