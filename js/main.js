@@ -96,6 +96,118 @@ document.addEventListener('DOMContentLoaded', () => {
 
   calculateMortgage();
 
+  // ===== EVENTOS DE USO ANÓNIMOS (TS10a) =====
+  // Nunca llevan datos personales; si la recolección está apagada o falla, el Landing sigue igual.
+  function track(name, properties) {
+    if (window.HipoSimEvents) window.HipoSimEvents.track(name, properties);
+  }
+
+  track('page_viewed', { language: window.i18n ? window.i18n.currentLanguage : undefined });
+
+  // "Iniciada": la primera vez que la persona toca un control del simulador.
+  // "Completada": cuando deja de moverlos unos segundos, es decir, se quedó con un resultado.
+  const SIMULATION_SETTLE_MS = 3000;
+  let simulationStarted = false;
+  let simulationCompleted = false;
+  let settleTimer = null;
+
+  function onSimulationTouched() {
+    if (!simulationStarted) {
+      simulationStarted = true;
+      track('simulation_started');
+    }
+    if (simulationCompleted) return;
+    clearTimeout(settleTimer);
+    settleTimer = setTimeout(() => {
+      simulationCompleted = true;
+      const { valor, años } = getSimulation();
+      track('simulation_completed', {
+        propertyValue: valor,
+        downPaymentPercent: parseFloat(sliderInicial.value),
+        termYears: años,
+        bonus: checkBono.checked,
+      });
+    }, SIMULATION_SETTLE_MS);
+  }
+
+  [sliderValor, sliderInicial, sliderPlazo].forEach((control) => control.addEventListener('input', onSimulationTouched));
+  checkBono.addEventListener('change', onSimulationTouched);
+
+  // ===== AVISO DE MEDICIÓN DE USO ANÓNIMA (TS10c, Ley N° 29733) =====
+  // Informa, no bloquea: se muestra una vez y la persona puede apagar la medición aquí o en la Política de Privacidad.
+  const NOTICE_KEY = 'hiposim.analytics.notice';
+  const usageNotice = document.getElementById('usage-notice');
+  const usageAccept = document.getElementById('usage-notice-accept');
+  const usageOptOut = document.getElementById('usage-notice-optout');
+  const usageStatus = document.getElementById('usage-status');
+  const usageToggle = document.getElementById('usage-toggle');
+  const events = window.HipoSimEvents;
+
+  const USAGE_TEXT = {
+    on: 'La medición de uso está activada.',
+    off: 'La medición de uso está desactivada.',
+    browser: 'La medición de uso está desactivada porque tu navegador tiene activado "No rastrear".',
+    disable: 'Desactivar la medición de uso',
+    enable: 'Activar la medición de uso',
+  };
+
+  function noticeSeen() {
+    try {
+      return localStorage.getItem(NOTICE_KEY) === 'seen';
+    } catch (error) {
+      return false;
+    }
+  }
+
+  function markNoticeSeen() {
+    try {
+      localStorage.setItem(NOTICE_KEY, 'seen');
+    } catch (error) {
+      /* almacenamiento no disponible: el aviso volverá a aparecer en otra visita */
+    }
+  }
+
+  function hideNotice() {
+    if (usageNotice) usageNotice.classList.add('hidden');
+  }
+
+  function renderUsageStatus() {
+    if (!events || !usageStatus || !usageToggle) return;
+    if (events.isDoNotTrack()) {
+      usageStatus.textContent = USAGE_TEXT.browser;
+      usageToggle.classList.add('hidden');
+      return;
+    }
+    const optedOut = events.isOptedOut();
+    usageStatus.textContent = optedOut ? USAGE_TEXT.off : USAGE_TEXT.on;
+    usageToggle.textContent = optedOut ? USAGE_TEXT.enable : USAGE_TEXT.disable;
+  }
+
+  if (events) {
+    renderUsageStatus();
+    if (usageToggle) {
+      usageToggle.addEventListener('click', () => {
+        events.setOptOut(!events.isOptedOut());
+        renderUsageStatus();
+      });
+    }
+    if (usageNotice && !noticeSeen() && !events.isDisabled()) usageNotice.classList.remove('hidden');
+    if (usageAccept) {
+      usageAccept.addEventListener('click', () => {
+        markNoticeSeen();
+        hideNotice();
+      });
+    }
+    if (usageOptOut) {
+      usageOptOut.addEventListener('click', () => {
+        events.setOptOut(true);
+        markNoticeSeen();
+        hideNotice();
+        renderUsageStatus();
+      });
+    }
+  }
+
   // ===== CRONOGRAMA COMPLETO (US15) =====
   const scheduleButton = document.getElementById('btn-schedule');
   const scheduleDialog = document.getElementById('schedule-dialog');
@@ -131,6 +243,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (scheduleButton && scheduleDialog) {
     scheduleButton.addEventListener('click', () => {
+      track('schedule_opened', { termYears: getSimulation().años });
       renderSchedule();
       if (typeof scheduleDialog.showModal === 'function') {
         scheduleDialog.showModal();
@@ -254,6 +367,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Solo un 201 real confirma la recepción.
       if (response.status === 201) {
+        track('contact_message_sent'); // solo el hecho de enviar: nada de lo que escribió la persona
         contactForm.reset();
         contactForm.style.display = 'none';
         successMessage.classList.remove('hidden');

@@ -238,6 +238,18 @@ const EN_TEXT = {
   'Transparencia Financiera': 'Financial Transparency',
   '© 2026 HipoSim Perú. Plataforma de simulación y cálculo financiero independiente sin afiliación a entidades bancarias comerciales.': '© 2026 HipoSim Peru. Independent financial simulation and calculation platform with no affiliation to commercial banking institutions.',
   'Lima, Perú': 'Lima, Peru',
+  // Medición de uso anónima (TS10c)
+  'Medimos el uso de este sitio de forma anónima, sin datos personales, para mejorar HipoSim.': 'We measure how this site is used anonymously, without personal data, to improve HipoSim.',
+  'Más información': 'More information',
+  'Entendido': 'Got it',
+  'No participar': 'Opt out',
+  'Datos de Uso Anónimos': 'Anonymous Usage Data',
+  'Para mejorar HipoSim registramos, de forma anónima, acciones como abrir la página, usar el simulador, ver el cronograma, cambiar el idioma o enviar el formulario de contacto. Estos registros usan un identificador aleatorio que dura solo mientras la pestaña está abierta, y no incluyen tu nombre, correo, teléfono ni lo que escribes en el formulario. Puedes desactivar esta medición en cualquier momento.': 'To improve HipoSim we anonymously record actions such as opening the page, using the simulator, viewing the schedule, changing the language or sending the contact form. These records use a random identifier that lasts only while the tab is open, and they do not include your name, email, phone number or what you type in the form. You can turn this measurement off at any time.',
+  'La medición de uso está activada.': 'Usage measurement is on.',
+  'La medición de uso está desactivada.': 'Usage measurement is off.',
+  'La medición de uso está desactivada porque tu navegador tiene activado "No rastrear".': 'Usage measurement is off because your browser has "Do Not Track" turned on.',
+  'Desactivar la medición de uso': 'Turn off usage measurement',
+  'Activar la medición de uso': 'Turn on usage measurement',
 };
 
 // Reglas para textos generados dinámicamente por main.js
@@ -301,9 +313,12 @@ class I18nManager {
 
   setLanguage(lang) {
     if (lang !== 'es_419' && lang !== 'en_US') return;
+    const changed = lang !== this.currentLanguage;
     this.currentLanguage = lang;
     this.setSavedLanguage(lang);
     this.apply();
+    // Solo cuenta el cambio hecho por la persona, no el idioma con el que arranca la página.
+    if (changed && window.HipoSimEvents) window.HipoSimEvents.track('language_changed', { language: lang });
   }
 
   t(orig) {
